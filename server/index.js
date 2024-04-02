@@ -19,8 +19,8 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
   })
 );
-app.use("/api/posts", postRoutes);
-app.use("/api/user", userRoutes);
+app.use("/posts", postRoutes);
+app.use("/user", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 

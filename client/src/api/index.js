@@ -11,10 +11,17 @@ Api.interceptors.request.use((req) => {
   return req;
 });
 
-const postUrl = "/api/posts";
-const userUrl = "/api/user";
+const postUrl = "/posts";
+const userUrl = "/user";
 
-export const fetchPosts = () => Api.get(postUrl);
+export const fetchPosts = (page) => Api.get(`${postUrl}?page=${page}`);
+export const fetchPost = (id) => Api.get(`${postUrl}/${id}`);
+export const fetchPostsBySearch = (searchQuery) =>
+  Api.get(
+    `${postUrl}/search?searchQuery=${searchQuery.search || "none"}&tags=${
+      searchQuery.tags
+    }`
+  );
 export const createPost = (newPost) => Api.post(postUrl, newPost);
 export const updatePost = (id, updatedPost) =>
   Api.patch(`${postUrl}/${id}`, updatedPost);
