@@ -50,7 +50,7 @@ export const signUp = async (req, res) => {
       password: hashedPassword,
       name: `${firstName} ${lastName}`,
     });
-
+    
     const token = jwt.sign({ email: result.email, id: result._id }, "test", {
       expiresIn: "1h",
     });

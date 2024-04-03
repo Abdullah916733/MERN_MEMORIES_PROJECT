@@ -32,19 +32,13 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
-  const handleKeyPress = (e) => {
-    if (e.keyCode === 13) {
-      searchPost();
-    }
-  };
-
   const handleAdd = (tag) => setTags([...tags, tag]);
 
   const handleDelete = (deleteTag) =>
     setTags(tags.filter((tag) => tag !== deleteTag));
 
   const searchPost = () => {
-    if (search.trim() || tags) {
+    if (search.trim() !== "" || tags.length > 0) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
       navigate(
         `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
@@ -53,10 +47,6 @@ const Home = () => {
       navigate("/");
     }
   };
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
 
   return (
     <Grow in>
@@ -84,7 +74,6 @@ const Home = () => {
                 fullWidth
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                onKeyPress={handleKeyPress}
               />
               <ChipInput
                 style={{ margin: "10px 0" }}

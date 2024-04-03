@@ -15,10 +15,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import {
-  deletePost,
-  likePost,
-} from "../../../actions/posts.js";
+import { deletePost, likePost } from "../../../actions/posts.js";
 import { useNavigate } from "react-router-dom";
 
 const Post = ({ post, setCurrentId }) => {
@@ -81,21 +78,21 @@ const Post = ({ post, setCurrentId }) => {
             {moment(post.createdAt).fromNow()}
           </Typography>
         </div>
-        {user?.result?.googleId === post?.creator ||
-          (user?.result?._id === post?.creator && (
-            <div className={classes.overlay2} name="edit">
-              <Button
-                style={{ color: "white" }}
-                size="small"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentId(post._id);
-                }}
-              >
-                <MoreHorizIcon fontSize="small" />
-              </Button>
-            </div>
-          ))}
+        {(user?.result?.googleId === post?.creator ||
+          user?.result?._id === post?.creator) && (
+          <div className={classes.overlay2} name="edit">
+            <Button
+              style={{ color: "white" }}
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentId(post._id);
+              }}
+            >
+              <MoreHorizIcon fontSize="small" />
+            </Button>
+          </div>
+        )}
         <div className={classes.details}>
           <Typography variant="body2" color="textSecondary" component="h2">
             {post.tags.map((tag) => `#${tag}`)}
@@ -126,19 +123,19 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </Button>
-        {user?.result.googleId === post?.creator ||
-          (user?.result?._id === post?.creator && (
-            <Button
-              size="small"
-              color="primary"
-              onClick={() => {
-                dispatch(deletePost(post._id));
-              }}
-            >
-              <DeleteIcon fontSize="small" />
-              Delete
-            </Button>
-          ))}
+        {(user?.result?.googleId === post?.creator ||
+          user?.result?._id === post?.creator) && (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              dispatch(deletePost(post._id));
+            }}
+          >
+            <DeleteIcon fontSize="small" />
+            Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

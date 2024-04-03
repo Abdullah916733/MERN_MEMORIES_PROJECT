@@ -52,6 +52,7 @@ export const createPost = async (req, res) => {
   const newPost = new PostMessage({
     ...post,
     creator: req.userId,
+    createdAt: new Date().toString(),
   });
   try {
     await newPost.save();

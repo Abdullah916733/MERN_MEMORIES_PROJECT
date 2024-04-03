@@ -4,6 +4,7 @@ import {
   Typography,
   CircularProgress,
   Divider,
+  Grid,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
@@ -94,36 +95,43 @@ const PostDetails = () => {
             You might also like:
           </Typography>
           <Divider />
-          <div className={classes.recommendedPosts}>
+          <Grid container spacing={6} className={classes.recommendedPosts}>
             {recommendedPosts?.map(
               ({ title, name, selectedFile, likes, _id, message }) => {
                 return (
-                  <div
-                    style={{ margin: "20px", cursor: "pointer" }}
+                  <Grid
+                    style={{ cursor: "pointer" }}
                     onClick={() => openPost(_id)}
                     key={_id}
+                    item
+                    lg={4}
+                    md={6}
+                    sm={12}
+                    xs={12}
                   >
-                    <Typography gutterBottom variant="h6">
-                      {title}
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle2">
-                      {name}
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle2">
-                      {message}
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle2">
-                      {title}
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle1">
-                      Likes: {likes.length}
-                    </Typography>
-                    <img src={selectedFile} width="200px" />
-                  </div>
+                    <Paper elevation={6} style={{ padding: "15px" }}>
+                      <Typography gutterBottom variant="h6">
+                        {title}
+                      </Typography>
+                      <Typography gutterBottom variant="subtitle2">
+                        {name}
+                      </Typography>
+                      <Typography gutterBottom variant="subtitle2">
+                        {message}
+                      </Typography>
+                      <Typography gutterBottom variant="subtitle2">
+                        {title}
+                      </Typography>
+                      <Typography gutterBottom variant="subtitle1">
+                        Likes: {likes.length}
+                      </Typography>
+                      <img src={selectedFile} width="100%" />
+                    </Paper>
+                  </Grid>
                 );
               }
             )}
-          </div>
+          </Grid>
         </div>
       )}
     </Paper>
