@@ -11,6 +11,7 @@ Api.interceptors.request.use((req) => {
   return req;
 });
 
+
 const postUrl = "/posts";
 const userUrl = "/user";
 
