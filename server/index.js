@@ -14,13 +14,17 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(
   cors({
-    origin: 'http://localhost:3000', // Allow requests from this origin
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Allow these methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+    origin: "https://abdullah-memories.netlify.app", // Allow requests from this origin
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Allow these methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
   })
 );
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
+
+app.use("/", (req, res) => {
+  res.status(200).send("API is RUNNING");
+});
 
 const PORT = process.env.PORT || 5000;
 
